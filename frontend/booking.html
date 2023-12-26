@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotel Booking App</title>
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+  <style>
+    body {
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      border-radius: 5px;
+      background-color: #fff;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      font-weight: bold;
+      color: #333;
+    }
+
+    .form-control {
+      border-radius: 3px;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+      border-color: #0056b3;
+    }
+
+    .btn-primary:focus {
+      box-shadow: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Hotel Booking App</h1>
+    <form id="bookingForm">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" class="form-control" id="phone" name="phoneNumber" required>
+      </div>
+      <div class="form-group">
+        <label for="checkInDate">Check-in Date</label>
+        <input type="date" class="form-control" id="checkInDate" name="checkInDate" required>
+      </div>
+      <div class="form-group">
+        <label for="checkOutDate">Check-out Date</label>
+        <input type="date" class="form-control" id="checkOutDate" name="checkOutDate" required>
+      </div>
+      <div class="form-group">
+        <label for="guests">Number of Guests</label>
+        <select class="form-control" id="guests" name="guests" required>
+          <option value="">Select</option>
+          <option value="1">1 Guest</option>
+          <option value="2">2 Guests</option>
+          <option value="3">3 Guests</option>
+          <option value="4">4 Guests</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="roomType">Room Type</label>
+        <select class="form-control" id="roomType" name="roomType" required>
+          <option value="">Select</option>
+          <option value="single">Single</option>
+          <option value="double">Double</option>
+          <option value="suite">Suite</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="specialRequests">Special Requests</label>
+        <textarea class="form-control" id="specialRequests" name="specialRequests" rows="3"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Book Now</button>
+    </form>
+  </div>
+
+  <!-- Bootstrap JS (optional) -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script src="https://unpkg.com/unfetch/dist/unfetch.umd.js"></script>
+
+  <script>
+   const form = document.getElementById('bookingForm');
+
+// Function to open the home page
+function openHomePage() {
+  // Replace 'home.html' with the actual home page URL
+  window.location.href = 'home.html';
+}
+
+// Add an event listener for form submission
+form.addEventListener('submit', function (event) {
+  event.preventDefault(); // Prevent the form from submitting normally
+
+  // Get the form data
+  const formData = new FormData(form);
+  const bookingData = Object.fromEntries(formData.entries());
+
+  // Send the form data to the backend for creating a new booking
+  fetch('http://localhost:3000/Hotel/bookings', {
+    method: 'POST', // Use POST to create a new booking
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(bookingData),
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      alert('Booking created successfully!');
+      openHomePage(); // Call the function to open the home page
+    })
+    .catch(error => {
+      console.log('Error creating booking:', error);
+      alert('An error occurred while creating the booking.');
+    });
+});
+
+  </script>
+</body>
+
+</html>

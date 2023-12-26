@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotel Booking App</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      background-color: #fff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #007bff;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+
+    .btn-primary:hover {
+      background-color: #0069d9;
+      border-color: #0062cc;
+    }
+
+    .booking-app-info {
+      text-align: center;
+      color: #888;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Hotel Booking App</h1>
+    <form id="bookingForm">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" class="form-control" id="phone" name="phoneNumber" required>
+      </div>
+      <div class="form-group">
+        <label for="checkInDate">Check-in Date</label>
+        <input type="date" class="form-control" id="checkInDate" name="checkInDate" required>
+      </div>
+      <div class="form-group">
+        <label for="checkOutDate">Check-out Date</label>
+        <input type="date" class="form-control" id="checkOutDate" name="checkOutDate" required>
+      </div>
+      <div class="form-group">
+        <label for="guests">Number of Guests</label>
+        <select class="form-control" id="guests" name="guests" required>
+          <option value="">Select</option>
+          <option value="1">1 Guest</option>
+          <option value="2">2 Guests</option>
+          <option value="3">3 Guests</option>
+          <option value="4">4 Guests</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="roomType">Room Type</label>
+        <select class="form-control" id="roomType" name="roomType" required>
+          <option value="">Select</option>
+          <option value="single">Single</option>
+          <option value="double">Double</option>
+          <option value="suite">Suite</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="specialRequests">Special Requests</label>
+        <textarea class="form-control" id="specialRequests" name="specialRequests" rows="3"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Update Now</button>
+    </form>
+    <p class="booking-app-info">Book your stay with ease at our luxurious hotel.</p>
+  </div>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script src="https://unpkg.com/unfetch/dist/unfetch.umd.js"></script>
+
+  <script>
+    
+    const form = document.getElementById('bookingForm');
+
+    // Add an event listener for form submission
+    form.addEventListener('submit', function (event) {
+      event.preventDefault(); // Prevent the form from submitting normally
+
+      // Get the form data
+      const formData = new FormData(form);
+      const bookingData = Object.fromEntries(formData.entries());
+
+      fetch('http://localhost:3000/Hotel/bookings/' + bookingData.email, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(bookingData),
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          alert('Booking updated successfully!');
+          
+        })
+        .catch(error => {
+          console.log('Error updating booking:', error);
+          alert('An error occurred while updating the booking.');
+        });
+    });
+  </script>
+</body>
+
+</html>

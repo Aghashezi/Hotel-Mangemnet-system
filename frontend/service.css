@@ -1,0 +1,104 @@
+.services_all_section {
+    padding: 20px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(ser.jpeg);
+    background-size: cover;
+    color: #fff ! important;
+    background-position: center;
+   }
+   .services {
+    margin-top: px;
+    font-family: cursive;
+    text-transform: uppercase;
+    text-align: center;
+   }
+   .border {
+    width: 100px;
+    height: 3px;
+    background: #58FAF4;
+    margin: 40px auto;
+   }
+   .border:hover {
+    background: red;
+    width: 200px;
+    transition: 1s;
+    transform: scaleX(250px);
+   }
+   .services_icon {
+    font-size: 40px;
+    margin: 22px auto;
+    padding-top: 22px;
+    height: 60px;
+    width: 60px;
+    color: cyan;
+    border: 2px solid white;
+    border-radius: 50%;
+   }
+   .services_icon:hover {
+    color: #FA58F4;
+    transition: .5s;
+    transform: rotate(360deg);
+   }
+   .services_work {
+    text-transform: uppercase;
+    font-size: 15px;
+    letter-spacing: 2px;
+    color: #9FF781;
+    font-family: monospace;
+   }
+   .services_work:hover {}
+   .service_box {
+    margin-top: 10px;
+    padding-right: 10px;
+   }
+   .service_box:hover {
+    box-shadow: 5px 7px 9px -3px;
+    cursor: pointer;
+    transition: .5s;
+    color: yellow;
+   }
+   .services_pragraph {
+    font-family: fantasy;
+    letter-spacing: 1px;
+    font-size: 14px;
+   }
+   .our_services_moredetails a {
+    text-decoration: none;
+    font-family: fantasy;
+    color: #E1F5A9;
+    font-size: 20px;
+   }
+   .our_services_moredetails a:hover {
+    text-decoration: none;
+    font-family: fantasy;
+    color: #81F7F3;
+   }
+  
+  
+   @media screen and (min-width:700px) {
+    .service_box {
+     transition: transform .5s;
+    }
+    @keyframes fadeIn {
+     from {
+      opacity: 0;
+     }
+     to {
+      opacity: 1;
+     }
+    }
+    .card:nth-child(1) {
+     animation: fadeIn .5s .5s backwards;
+    }
+    .card:nth-child(2) {
+     animation: fadeIn .5s 1s backwards;
+    }
+    .card:nth-child(3) {
+     animation: fadeIn .5s 1.5s backwards;
+    }
+    .card:nth-child(4) {
+     animation: fadeIn .5 2s backwards;
+    }
+    .service_box:hover {
+     transform: scale(1.05);
+    }
+   }
